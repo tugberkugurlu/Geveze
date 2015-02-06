@@ -5,17 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 
-namespace Geveze.Web.Hubs {
-
-    public class User {
-
+namespace Geveze.Web.Hubs 
+{
+    public class User 
+    {
         public string Name { get; set; }
         public HashSet<string> ConnectionIds { get; set; }
     }
 
     [Authorize]
-    public class ChatHub : Hub {
-
+    public class ChatHub : Hub 
+    {
         // References: 
         // https://github.com/SignalR/SignalR/wiki/Hubs
         // https://github.com/SignalR/Samples/blob/master/BasicChat/ChatWithTracking.cs
@@ -24,16 +24,16 @@ namespace Geveze.Web.Hubs {
         private static readonly ConcurrentDictionary<string, User> Users 
             = new ConcurrentDictionary<string, User>(StringComparer.InvariantCultureIgnoreCase);
 
-        public void Send(string message) {
-
+        public void Send(string message) 
+        {
             string sender = Context.User.Identity.Name;
 
             // So, broadcast the sender, too.
             Clients.All.received(new { sender = sender, message = message, isPrivate = false });
         }
 
-        public void Send(string message, string to) {
-
+        public void Send(string message, string to) 
+        {
             User receiver;
             if (Users.TryGetValue(to, out receiver)) {
 
@@ -53,8 +53,8 @@ namespace Geveze.Web.Hubs {
             }
         }
 
-        public IEnumerable<string> GetConnectedUsers() {
-
+        public IEnumerable<string> GetConnectedUsers()
+        {
             return Users.Where(x => {
 
                 lock (x.Value.ConnectionIds) {
@@ -65,8 +65,8 @@ namespace Geveze.Web.Hubs {
             }).Select(x => x.Key);
         }
 
-        public override Task OnConnected() {
-
+        public override Task OnConnected() 
+        {
             string userName = Context.User.Identity.Name;
             string connectionId = Context.ConnectionId;
 
@@ -93,8 +93,8 @@ namespace Geveze.Web.Hubs {
             return base.OnConnected();
         }
 
-        public override Task OnDisconnected() {
-
+        public override Task OnDisconnected() 
+        {
             string userName = Context.User.Identity.Name;
             string connectionId = Context.ConnectionId;
             
@@ -123,8 +123,8 @@ namespace Geveze.Web.Hubs {
             return base.OnDisconnected();
         }
 
-        private User GetUser(string username) {
-
+        private User GetUser(string username) 
+        {
             User user;
             Users.TryGetValue(username, out user);
 
