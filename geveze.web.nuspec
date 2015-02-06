@@ -9,6 +9,6 @@
     <description>Geveze application artifacts</description>
   </metadata>
 <files>
-  <file src="artifacts\Release\_PublishedWebsites\Geveze.Web\**\*.*" target="app" />
+  <file src="artifacts\Release\_PublishedWebsites\Geveze.Web\**\*.*" />
 </files>
 </package>
