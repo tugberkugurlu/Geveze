@@ -1,21 +1,32 @@
-﻿using System.Web.Mvc;
+﻿using System.Configuration;
+using System.Data.SqlClient;
+using System.Web.Mvc;
 using System.Web.Security;
+using Dapper;
 using Geveze.Web.Models;
 
-namespace Geveze.Web.Controllers {
+namespace Geveze.Web.Controllers 
+{
+    public class AccountController : Controller
+    {
+        public const string DbConnStrName = "gevezedb";
 
-    public class AccountController : Controller {
-
-        public ViewResult Login() {
-
+        public ViewResult Login() 
+        {
             return View();
         }
 
         [HttpPost]
         [ActionName("Login")]
-        public ActionResult PostLogin(LoginModel loginModel) {
-
-            if (ModelState.IsValid) {
+        public ActionResult PostLogin(LoginModel loginModel) 
+        {
+            if (ModelState.IsValid)
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["gevezedb"].ConnectionString))
+                {
+                    connection.Open();
+                    connection.Execute("INSERT INTO Users (Name) VALUES(@name)", new { name = loginModel.Name });
+                }
 
                 FormsAuthentication.SetAuthCookie(loginModel.Name, true);
                 return RedirectToAction("index", "home");
@@ -26,8 +37,8 @@ namespace Geveze.Web.Controllers {
 
         [HttpPost]
         [ActionName("SignOut")]
-        public ActionResult PostSignOut() {
-
+        public ActionResult PostSignOut() 
+        {
             FormsAuthentication.SignOut();
             return RedirectToAction("index", "home");
         }
