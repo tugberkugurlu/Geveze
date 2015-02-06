@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -25,7 +26,7 @@ namespace Geveze.Web.Controllers
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["gevezedb"].ConnectionString))
                 {
                     connection.Open();
-                    connection.Execute("INSERT INTO Users (Name) VALUES(@name)", new { name = loginModel.Name });
+                    connection.Execute("INSERT INTO Users (Id, Name) VALUES(@id, @name)", new { id = Guid.NewGuid().ToString("D"), name = loginModel.Name });
                 }
 
                 FormsAuthentication.SetAuthCookie(loginModel.Name, true);
