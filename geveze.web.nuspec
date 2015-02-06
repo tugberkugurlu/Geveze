@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>geveze.web</id>
+    <version>0.0.0</version>
+    <authors>Red Gate</authors>
+    <owners>Red Gate</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Geveze application artifacts</description>
+  </metadata>
+<files>
+  <file src="artifacts\Release\_PublishedWebsites\Geveze.Web\**\*.*" target="app" />
+</files>
+</package>
