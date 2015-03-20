@@ -15,8 +15,8 @@ function Download-File($url, $targetFile) {
         $targetStream.Write($buffer, 0, $count) 
         $count = $responseStream.Read($buffer,0,$buffer.length) 
         $downloadedBytes = $downloadedBytes + $count 
-    } 
-    "`nFinished Download" 
+    }
+	
     $targetStream.Flush()
     $targetStream.Close() 
     $targetStream.Dispose() 
@@ -35,7 +35,7 @@ $fullPathToUnzip = "$env:TEMP\sqlci"
 New-Item -Path $fullPathToUnzip -ItemType Directory | Out-Null
 Download-File $zipToDownloadUrl $zipFileFullPath
 
-Write-Host $zipFileFullPath
+Write-Host "$($zipFileFullPath) has been downloaded."
 
  # Unzip the downloaded zip file
 $shellApp = new-object -com shell.application
