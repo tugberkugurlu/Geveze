@@ -11,9 +11,7 @@ function Download-File($url, $targetFile) {
     $count = $responseStream.Read($buffer,0,$buffer.length) 
     $downloadedBytes = $count 
     while ($count -gt 0) 
-    { 
-        [System.Console]::CursorLeft = 0 
-        [System.Console]::Write("Downloaded {0}K of {1}K", [System.Math]::Floor($downloadedBytes/1024), $totalLength) 
+    {
         $targetStream.Write($buffer, 0, $count) 
         $count = $responseStream.Read($buffer,0,$buffer.length) 
         $downloadedBytes = $downloadedBytes + $count 
