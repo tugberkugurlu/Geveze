@@ -38,8 +38,10 @@ Download-File $zipToDownloadUrl $zipFileFullPath
 Write-Host "$($zipFileFullPath) has been downloaded."
 Write-Host "Extracting under $($fullPathToUnzip)"
 
- # Unzip the downloaded zip file
-$shellApp = new-object -com shell.application
-$zipFile = $shellApp.namespace($zipFileFullPath)
-$destinationToUnzip = $shellApp.namespace($fullPathToUnzip)
-$destinationToUnzip.Copyhere($zipFile.items())
+# Unzip the downloaded zip file
+# $shellApp = new-object -com shell.application
+# $zipFile = $shellApp.namespace($zipFileFullPath)
+# $destinationToUnzip = $shellApp.namespace($fullPathToUnzip)
+# $destinationToUnzip.Copyhere($zipFile.items())
+
+7z x "$zipFileFullPath" -o"$fullPathToUnzip"
