@@ -12,3 +12,10 @@ before_build:
   
 build_script:
   - cmd: build.cmd
+  
+artifacts:
+  - path: artifacts\Release\_PublishedWebsites\Geveze.Web
+    name: Geveze.Web
+    type: zip
+  - path: Geveze.*.nupkg
+    name: GevezeDb
