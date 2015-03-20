@@ -17,5 +17,5 @@ artifacts:
   - path: artifacts\Release\_PublishedWebsites\Geveze.Web
     name: Geveze.Web
     type: zip
-  - path: Geveze.*.nupkg
+  - path: artifacts\Geveze.*.nupkg
     name: GevezeDb
