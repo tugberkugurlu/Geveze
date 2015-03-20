@@ -31,11 +31,12 @@ function Get-BaseName {
 $zipToDownloadUrl = "https://tugberkredgate.blob.core.windows.net/cmd/sqlCI.zip"
 $zipFileName = "$(Get-BaseName).zip"
 $zipFileFullPath = "$env:TEMP\$zipFileName"
-$fullPathToUnzip = "$env:TEMP\sqlci"
+$fullPathToUnzip = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)\sqlci"
 New-Item -Path $fullPathToUnzip -ItemType Directory | Out-Null
 Download-File $zipToDownloadUrl $zipFileFullPath
 
 Write-Host "$($zipFileFullPath) has been downloaded."
+Write-Host "Extracting under $($fullPathToUnzip)"
 
  # Unzip the downloaded zip file
 $shellApp = new-object -com shell.application
