@@ -1,5 +1,8 @@
 version: 1.0.1.{build}
 
+build: off
+test: off
+
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
@@ -7,9 +10,9 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 
-before_build:
+install:
   - ps: scripts\pre-build.ps1
-  
+
 build_script:
   - cmd: build.cmd
   
