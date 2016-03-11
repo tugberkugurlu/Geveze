@@ -1,3 +1,5 @@
+$ErrorActionPreference = "Stop"
+
 param(
     $buildFile   = (join-path (Split-Path -parent $MyInvocation.MyCommand.Definition) "build.msbuild"),
     $buildParams = "/p:Configuration=Release",
